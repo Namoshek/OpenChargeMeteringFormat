@@ -120,5 +120,14 @@ namespace OpenChargeMeteringFormat.Types
         [JsonProperty(PropertyName = "CI", NullValueHandling = NullValueHandling.Ignore)]
         public string ChargePointIdentification { get; set; }
         #endregion
+
+        #region metering data
+        /// <summary>
+        /// The readings made by the metering device, each with time, value and other parameters.
+        /// A readin may also indicate an error.
+        /// </summary>
+        [JsonProperty(PropertyName = "RD", Required = Required.Always)]
+        public string[] Readings { get; set; }
+        #endregion
     }
 }
