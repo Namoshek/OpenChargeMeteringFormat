@@ -28,5 +28,8 @@ jobs:
         with:
           dotnet-version: '6.0.x'
 
+      - name: Run tests
+        run: dotnet test --configuration 'Debug'
+
       - name: Build package
         run: dotnet build --configuration 'Release'
