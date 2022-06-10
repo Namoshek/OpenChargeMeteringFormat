@@ -22,4 +22,13 @@
     <ProjectReference Include="..\OpenChargeMeteringFormat\OpenChargeMeteringFormat.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Resources\01_valid_ocmf_message_compact">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\02_valid_ocmf_message_formatted">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

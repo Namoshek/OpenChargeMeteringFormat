@@ -29,7 +29,7 @@ namespace OpenChargeMeteringFormat.Converters
 
             if (string.IsNullOrWhiteSpace(input))
             {
-                return null;
+                return Array.Empty<EReadingErrorFlag>();
             }
 
             var readingErrorFlags = input.AsEnumerable()

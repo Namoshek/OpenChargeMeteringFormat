@@ -127,7 +127,7 @@ namespace OpenChargeMeteringFormat.Types
         /// A readin may also indicate an error.
         /// </summary>
         [JsonProperty(PropertyName = "RD", Required = Required.Always)]
-        public string[] Readings { get; set; }
+        public Reading[] Readings { get; set; }
         #endregion
     }
 }
