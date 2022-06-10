@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.0.1</Version>
+    <AssemblyVersion>0.0.1.0</AssemblyVersion>
+    <FileVersion>0.0.1.0</FileVersion>
+    <Authors>Namoshek (Marvin Mall)</Authors>
+    <Company>Namoshek (Marvin Mall)</Company>
+    <PackageId>OpenChargeMeteringFormat</PackageId>
+    <Product>OpenChargeMeteringFormat</Product>
+    <Description>A .NET implementation of the Open Charge Metering Format (OCMF).</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Namoshek/OpenChargeMeteringFormat</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Namoshek/OpenChargeMeteringFormat.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>ocmf</PackageTags>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+</Project>
