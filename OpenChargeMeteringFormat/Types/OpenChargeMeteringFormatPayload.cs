@@ -89,8 +89,8 @@ namespace OpenChargeMeteringFormat.Types
         /// <summary>
         /// Details regarding the user attribution.
         /// </summary>
-        [JsonProperty(PropertyName = "IF", NullValueHandling = NullValueHandling.Ignore)]
-        public string[] IdentificationFlags { get; set; }
+        [JsonProperty(PropertyName = "IF", ItemConverterType = typeof(StringEnumConverter), NullValueHandling = NullValueHandling.Ignore)]
+        public EIdentificationFlag[] IdentificationFlags { get; set; } = new EIdentificationFlag[0];
 
         /// <summary>
         /// The type of identification.

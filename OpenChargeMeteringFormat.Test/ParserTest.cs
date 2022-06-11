@@ -57,8 +57,8 @@ namespace OpenChargeMeteringFormat.Test
             Assert.True(message.Payload.IdentificationStatus);
             Assert.Equal(Types.EIdentificationLevel.Verified, message.Payload.IdentificationLevel);
             Assert.Equal(2, message.Payload.IdentificationFlags.Length);
-            Assert.Contains("RFID_PLAIN", message.Payload.IdentificationFlags);
-            Assert.Contains("OCPP_RS_TLS", message.Payload.IdentificationFlags);
+            Assert.Contains(Types.EIdentificationFlag.RFID_Plain, message.Payload.IdentificationFlags);
+            Assert.Contains(Types.EIdentificationFlag.OCPP_RemoteStartWithTls, message.Payload.IdentificationFlags);
             Assert.Equal(Types.EIdentificationType.ISO14443, message.Payload.IdentificationType);
             Assert.Equal("1F2D3A4F5506C7", message.Payload.IdentificationData);
 
@@ -104,8 +104,8 @@ namespace OpenChargeMeteringFormat.Test
             Assert.True(message.Payload.IdentificationStatus);
             Assert.Equal(Types.EIdentificationLevel.Verified, message.Payload.IdentificationLevel);
             Assert.Equal(2, message.Payload.IdentificationFlags.Length);
-            Assert.Contains("RFID_PLAIN", message.Payload.IdentificationFlags);
-            Assert.Contains("OCPP_RS_TLS", message.Payload.IdentificationFlags);
+            Assert.Contains(Types.EIdentificationFlag.RFID_Plain, message.Payload.IdentificationFlags);
+            Assert.Contains(Types.EIdentificationFlag.OCPP_RemoteStartWithTls, message.Payload.IdentificationFlags);
             Assert.Equal(Types.EIdentificationType.ISO14443, message.Payload.IdentificationType);
             Assert.Equal("1F2D3A4F5506C7", message.Payload.IdentificationData);
 
