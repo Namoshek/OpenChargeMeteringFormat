@@ -1,3 +1,5 @@
+using System;
+using FluentResults;
 using Newtonsoft.Json;
 using OpenChargeMeteringFormat.Types;
 
@@ -9,20 +11,42 @@ namespace OpenChargeMeteringFormat
         /// Parses the given <paramref name="message"/> as <see cref="OpenChargeMeteringFormatMessage"/>.
         /// </summary>
         /// <param name="message"></param>
-        public static OpenChargeMeteringFormatMessage ParseMessage(string message)
+        public static Result<OpenChargeMeteringFormatMessage> ParseMessage(string message)
         {
-            if (!IsValidMessage(message))
+            if (string.IsNullOrWhiteSpace(message))
             {
-                return null;
+                return Result.Fail("The message may not be null or empty.");
+            }
+
+            if (!message.StartsWith("OCMF"))
+            {
+                return Result.Fail("The message does not start with the required 'OCMF' prefix.");
             }
 
             var parts = message.Split('|');
 
-            return new OpenChargeMeteringFormatMessage
+            if (parts.Length != 3)
             {
-                Payload = ParsePayload(parts[1]),
-                Signature = ParseSignature(parts[2]),
-            };
+                return Result.Fail("The message is malformed. It does not contain 3 parts.");
+            }
+
+            var payloadResult = ParsePayload(parts[1]);
+            if (payloadResult.IsFailed)
+            {
+                return payloadResult.ToResult<OpenChargeMeteringFormatMessage>();
+            }
+
+            var signatureResult = ParseSignature(parts[2]);
+            if (signatureResult.IsFailed)
+            {
+                return signatureResult.ToResult<OpenChargeMeteringFormatMessage>();
+            }
+
+            return Result.Ok(new OpenChargeMeteringFormatMessage
+            {
+                Payload = payloadResult.Value,
+                Signature = signatureResult.Value,
+            });
         }
 
         /// <summary>
@@ -33,78 +57,38 @@ namespace OpenChargeMeteringFormat
         /// <returns></returns>
         public static bool IsValidMessage(string message)
         {
-            if (message == null)
-            {
-                return false;
-            }
-
-            if (!message.StartsWith("OCMF"))
-            {
-                return false;
-            }
-
-            var parts = message.Split('|');
-
-            if (parts.Length != 3)
-            {
-                return false;
-            }
-
-            if (!(IsValidPayload(parts[1]) && IsValidSignature(parts[2])))
-            {
-                return false;
-            }
-
-            return true;
+            return ParseMessage(message).IsSuccess;
         }
 
         /// <summary>
         /// Parses the given <paramref name="payload"/> as <see cref="OpenChargeMeteringFormatPayload"/>.
         /// </summary>
         /// <param name="payload"></param>
-        private static OpenChargeMeteringFormatPayload ParsePayload(string payload)
+        private static Result<OpenChargeMeteringFormatPayload> ParsePayload(string payload)
         {
-            return JsonConvert.DeserializeObject<OpenChargeMeteringFormatPayload>(payload);
+            try
+            {
+                return Result.Ok(JsonConvert.DeserializeObject<OpenChargeMeteringFormatPayload>(payload));
+            }
+            catch (Exception ex)
+            {
+                return Result.Fail(new Error("The payload has an invalid format or lacks required fields.").CausedBy(ex));
+            }
         }
 
         /// <summary>
         /// Parses the given <paramref name="signature"/> as <see cref="OpenChargeMeteringFormatSignature"/>.
         /// </summary>
         /// <param name="signature"></param>
-        private static OpenChargeMeteringFormatSignature ParseSignature(string signature)
-        {
-            return JsonConvert.DeserializeObject<OpenChargeMeteringFormatSignature>(signature);
-        }
-
-        /// <summary>
-        /// Determines whether the given <paramref name="payload"/> contains a valid payload object.
-        /// </summary>
-        /// <param name="payload"></param>
-        private static bool IsValidPayload(string payload)
+        private static Result<OpenChargeMeteringFormatSignature> ParseSignature(string signature)
         {
             try
             {
-                return ParsePayload(payload) != null;
+                return Result.Ok(JsonConvert.DeserializeObject<OpenChargeMeteringFormatSignature>(signature));
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Determines whether the given <paramref name="signature"/> contains a valid signature object.
-        /// </summary>
-        /// <param name="signature"></param>
-        private static bool IsValidSignature(string signature)
-        {
-            try
-            {
-                return ParseSignature(signature) != null;
-            }
-            catch
-            {
-                return false;
+                return Result.Fail(new Error("The signature has an invalid format or lacks required fields.").CausedBy(ex));
             }
         }
     }

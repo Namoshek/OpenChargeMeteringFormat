@@ -39,7 +39,11 @@ namespace OpenChargeMeteringFormat.Test
 
             Assert.True(OpenChargeMeteringFormatParser.IsValidMessage(validMessage));
 
-            var message = OpenChargeMeteringFormatParser.ParseMessage(validMessage);
+            var messageResult = OpenChargeMeteringFormatParser.ParseMessage(validMessage);
+
+            Assert.True(messageResult.IsSuccess);
+
+            var message = messageResult.Value;
 
             Assert.NotNull(message);
             Assert.NotNull(message.Payload);
@@ -86,7 +90,11 @@ namespace OpenChargeMeteringFormat.Test
 
             Assert.True(OpenChargeMeteringFormatParser.IsValidMessage(validMessage));
 
-            var message = OpenChargeMeteringFormatParser.ParseMessage(validMessage);
+            var messageResult = OpenChargeMeteringFormatParser.ParseMessage(validMessage);
+
+            Assert.True(messageResult.IsSuccess);
+
+            var message = messageResult.Value;
 
             Assert.NotNull(message);
             Assert.NotNull(message.Payload);
