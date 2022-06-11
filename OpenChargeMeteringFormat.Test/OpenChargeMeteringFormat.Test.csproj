@@ -29,6 +29,12 @@
     <None Update="Resources\02_valid_ocmf_message_formatted">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\10_ocmf_message_with_invalid_payload">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\11_ocmf_message_with_invalid_signature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -8,6 +8,31 @@ namespace OpenChargeMeteringFormat.Test
     public class ParserTest
     {
         [Fact]
+        public void GivenStringWhichDoesNotStartWithOpenChargeMeteringFormatPrefix_IsValidMessage_ReturnsFalse()
+        {
+            Assert.False(OpenChargeMeteringFormatParser.IsValidMessage(null));
+            Assert.False(OpenChargeMeteringFormatParser.IsValidMessage(""));
+            Assert.False(OpenChargeMeteringFormatParser.IsValidMessage("FOO"));
+            Assert.False(OpenChargeMeteringFormatParser.IsValidMessage("FOO|{}|{}"));
+        }
+
+        [Fact]
+        public async Task GivenStringWhichStartsWithOpenChargeMeteringFormatPrefixButHasInvalidPayload_IsValidMessage_ReturnsFalse()
+        {
+            var validMessage = await File.ReadAllTextAsync("Resources/10_ocmf_message_with_invalid_payload");
+
+            Assert.False(OpenChargeMeteringFormatParser.IsValidMessage(validMessage));
+        }
+
+        [Fact]
+        public async Task GivenStringWhichStartsWithOpenChargeMeteringFormatPrefixButHasInvalidSignature_IsValidMessage_ReturnsFalse()
+        {
+            var validMessage = await File.ReadAllTextAsync("Resources/11_ocmf_message_with_invalid_signature");
+
+            Assert.False(OpenChargeMeteringFormatParser.IsValidMessage(validMessage));
+        }
+
+        [Fact]
         public async Task GivenCompactValidOpenChargingMeteringFormatMessage_ParserParsesInputCorrectly()
         {
             var validMessage = await File.ReadAllTextAsync("Resources/01_valid_ocmf_message_compact");

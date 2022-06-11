@@ -1,0 +1,31 @@
+﻿OCMF|{
+    "FV": "1.0",
+    "GI": "ABL SBC-301",
+    "GS": "808829900001",
+    "GV": "1.4p3",
+    "PG": "T12345",
+    "MV": "Phoenix Contact",
+    "MM": "EEM-350-D-MCB",
+    "MS": "BQ27400330016",
+    "MF": "1.0",
+    "IS": true,
+    "IL": "VERIFIED",
+    "IF": [
+        "RFID_PLAIN",
+        "OCPP_RS_TLS"
+    ],
+    "IT": "ISO14443",
+    "ID": "1F2D3A4F5506C7",
+    "RD": [
+        {
+            "TM": "2018-07-24T13:22:04,000+0200 S",
+            "TX": "B",
+            "RV": 2935.6,
+            "RI": "1-b:1.8.0",
+            "RU": "kWh",
+            "RT": "AC",
+            "EF": "",
+            "ST": "G"
+        }
+    ]
+}|{}
