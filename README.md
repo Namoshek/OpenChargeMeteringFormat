@@ -56,6 +56,8 @@ In case of failure, the result _may_ contains errors which can be retrieved usin
 `Result<OpenChargeMeteringFormatMessage>.Errors`. To check for presence of errors,
 use `Result<OpenChargeMeteringFormatMessage>.Errors.Any()`.
 
+`IsSuccess` and `IsFailed` are mutually exclusive, i.e. when one is `true`, the other is `false`.
+
 ## License
 
 This library is open-sourced software licensed under the [MIT license](LICENSE).
