@@ -13,7 +13,7 @@ Install-Package OpenChargeMeteringFormat
 
 ## Usage
 
-There is only one class you should interact with, namely `OpenChargeMeteringFormatParser`.
+There is only one class you should interact with called `OpenChargeMeteringFormatParser`.
 It provides you with two methods to validate and parse OCMF messages:
 
 ```csharp
