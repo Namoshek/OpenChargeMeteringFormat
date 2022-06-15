@@ -1,4 +1,4 @@
-# OpenChargeMeteringFormat
+# OpenChargeMeteringFormat [![Nuget](https://img.shields.io/nuget/v/OpenChargeMeteringFormat?style=flat-square)](https://nuget.org/packages/OpenChargeMeteringFormat)
 
 A .NET implementation of the [Open Charge Metering Format (OCMF)](https://github.com/SAFE-eV/OCMF-Open-Charge-Metering-Format).
 
