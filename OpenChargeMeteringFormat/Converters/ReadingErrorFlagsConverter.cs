@@ -6,7 +6,7 @@ using OpenChargeMeteringFormat.Util;
 
 namespace OpenChargeMeteringFormat.Converters
 {
-    public class ReadingErrorFlagsConverter : JsonConverter<EReadingErrorFlag[]>
+    internal class ReadingErrorFlagsConverter : JsonConverter<EReadingErrorFlag[]>
     {
         public override void WriteJson(JsonWriter writer, EReadingErrorFlag[] value, JsonSerializer serializer)
         {

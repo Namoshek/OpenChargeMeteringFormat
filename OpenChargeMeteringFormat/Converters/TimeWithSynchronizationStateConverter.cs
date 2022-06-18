@@ -5,7 +5,7 @@ using OpenChargeMeteringFormat.Util;
 
 namespace OpenChargeMeteringFormat.Converters
 {
-    public class TimeWithSynchronizationStateConverter : JsonConverter<TimeWithSynchronizationState>
+    internal class TimeWithSynchronizationStateConverter : JsonConverter<TimeWithSynchronizationState>
     {
         private const string DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss,fffzzz";
 
