@@ -112,7 +112,7 @@ namespace OpenChargeMeteringFormat.Types
         /// </summary>
         [JsonProperty(PropertyName = "CT", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public EChargePointIdentificationType ChargePointIdentificationType { get; set; }
+        public EChargePointIdentificationType? ChargePointIdentificationType { get; set; }
 
         /// <summary>
         /// The identification of the charge point where this data has been recorded at.
