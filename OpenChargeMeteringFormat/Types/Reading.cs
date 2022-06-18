@@ -4,6 +4,9 @@ using OpenChargeMeteringFormat.Converters;
 
 namespace OpenChargeMeteringFormat.Types
 {
+    /// <summary>
+    /// Specification: <see href="https://github.com/SAFE-eV/OCMF-Open-Charge-Metering-Format/blob/master/OCMF-de.md#ablesungen"/>
+    /// </summary>
     public partial class Reading
     {
         /// <summary>

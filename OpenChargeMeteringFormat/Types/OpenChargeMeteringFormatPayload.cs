@@ -3,6 +3,9 @@ using Newtonsoft.Json.Converters;
 
 namespace OpenChargeMeteringFormat.Types
 {
+    /// <summary>
+    /// Specification: <see href="https://github.com/SAFE-eV/OCMF-Open-Charge-Metering-Format/blob/master/OCMF-de.md#nutzdatensektion"/>
+    /// </summary>
     public class OpenChargeMeteringFormatPayload
     {
         #region general information
