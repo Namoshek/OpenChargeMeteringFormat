@@ -5,7 +5,12 @@ VisualStudioVersion = 17.1.32113.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenChargeMeteringFormat", "OpenChargeMeteringFormat\OpenChargeMeteringFormat.csproj", "{CC1869D5-FA23-4014-8656-EFC43BE11F48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenChargeMeteringFormat.Test", "OpenChargeMeteringFormat.Test\OpenChargeMeteringFormat.Test.csproj", "{EDD756D4-A75C-4B48-9D55-259B6D5669D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenChargeMeteringFormat.Test", "OpenChargeMeteringFormat.Test\OpenChargeMeteringFormat.Test.csproj", "{EDD756D4-A75C-4B48-9D55-259B6D5669D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E8E7DF0E-40FD-4ED0-863D-D3AD856139B1}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

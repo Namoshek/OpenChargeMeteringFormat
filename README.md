@@ -31,7 +31,18 @@ if (!OpenChargeMeteringFormatParser.IsValidMessage(message))
 var parseResult = OpenChargeMeteringFormatParser.ParseMessage(message);
 if (parseResult.IsFailed)
 {
-    Console.WriteLine($"Not a valid OCMF message: {parseResult.Errors.First()?.Message}");
+    if (parseResult.HasError<InputIsNotAnOpenChargeMeteringFormatMessage>())
+    {
+        Console.WriteLine("The given string is not a valid OCMF message according to the specification.");
+    }
+    else if (parseResult.HasError<PayloadHasAnInvalidFormat>())
+    {
+        Console.WriteLine("The given OCMF message contains an invalid payload.");
+    }
+    else
+    {
+        Console.WriteLine($"Not a valid OCMF message: {parseResult.Errors.First().Message}");
+    }
 
     return;
 }

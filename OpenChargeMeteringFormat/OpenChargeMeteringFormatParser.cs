@@ -1,10 +1,14 @@
 using System;
 using FluentResults;
 using Newtonsoft.Json;
+using OpenChargeMeteringFormat.Errors;
 using OpenChargeMeteringFormat.Types;
 
 namespace OpenChargeMeteringFormat
 {
+    /// <summary>
+    /// A parser for the <see href="https://github.com/SAFE-eV/OCMF-Open-Charge-Metering-Format">OCMF protocol</see>.
+    /// </summary>
     public class OpenChargeMeteringFormatParser
     {
         /// <summary>
@@ -15,19 +19,19 @@ namespace OpenChargeMeteringFormat
         {
             if (string.IsNullOrWhiteSpace(message))
             {
-                return Result.Fail("The message may not be null or empty.");
+                return Result.Fail(new InputIsNotAnOpenChargeMeteringFormatMessage("The message may not be null or empty."));
             }
 
             if (!message.StartsWith("OCMF"))
             {
-                return Result.Fail("The message does not start with the required 'OCMF' prefix.");
+                return Result.Fail(new InputIsNotAnOpenChargeMeteringFormatMessage("The message does not start with the required 'OCMF' prefix."));
             }
 
             var parts = message.Split('|');
 
             if (parts.Length != 3)
             {
-                return Result.Fail("The message is malformed. It does not contain 3 parts.");
+                return Result.Fail(new InputIsNotAnOpenChargeMeteringFormatMessage("The message is malformed. It does not contain 3 parts."));
             }
 
             var payloadResult = ParsePayload(parts[1]);
@@ -72,7 +76,7 @@ namespace OpenChargeMeteringFormat
             }
             catch (Exception ex)
             {
-                return Result.Fail(new Error("The payload has an invalid format or lacks required fields.").CausedBy(ex));
+                return Result.Fail(new PayloadHasAnInvalidFormat().CausedBy(ex));
             }
         }
 
@@ -88,7 +92,7 @@ namespace OpenChargeMeteringFormat
             }
             catch (Exception ex)
             {
-                return Result.Fail(new Error("The signature has an invalid format or lacks required fields.").CausedBy(ex));
+                return Result.Fail(new SignatureHasAnInvalidFormat().CausedBy(ex));
             }
         }
     }
