@@ -17,6 +17,10 @@ jobs:
       matrix:
         operating-system: ['ubuntu-latest', 'windows-latest']
         dotnet-version: ['6.0.x']
+        include:
+          - operating-system: 'windows-latest'
+            dotnet-version: '6.0.x'
+            run-sonarqube-analysis: true
 
     steps:
       - uses: actions/checkout@v3
@@ -24,6 +28,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up JDK 11 for SonarQube
+        if: matrix.run-sonarqube-analysis
         uses: actions/setup-java@v1
         with:
           java-version: 1.11
@@ -34,11 +39,13 @@ jobs:
           dotnet-version: ${{ matrix.dotnet-version }}
 
       - name: Install dotnet-coverage
+        if: matrix.run-sonarqube-analysis
         shell: bash
         run: dotnet tool install --global dotnet-coverage
 
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
+        if: matrix.run-sonarqube-analysis
         with:
           path: ~\sonar\cache
           key: ${{ runner.os }}-sonar
@@ -46,6 +53,7 @@ jobs:
 
       - name: Cache SonarCloud scanner
         id: cache-sonar-scanner
+        if: matrix.run-sonarqube-analysis
         uses: actions/cache@v3
         with:
           path: .\.sonar\scanner
@@ -53,13 +61,14 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar-scanner
 
       - name: Install SonarCloud scanner
-        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        if: matrix.run-sonarqube-analysis && steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
         run: |
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
 
       - name: Build and analyze
+        if: matrix.run-sonarqube-analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -75,3 +84,11 @@ jobs:
           dotnet-coverage collect 'dotnet test --no-restore --no-build --configuration Release' -f xml -o 'coverage.xml'
           .\.sonar\scanner\dotnet-sonarscanner end \
               /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
+      - name: Build package
+        if: matrix.run-sonarqube-analysis != true
+        run: dotnet build --configuration 'Release'
+
+      - name: Run tests
+        if: matrix.run-sonarqube-analysis != true
+        run: dotnet test --configuration 'Debug'
