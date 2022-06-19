@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -93,7 +94,7 @@ namespace OpenChargeMeteringFormat.Types
         /// Details regarding the user attribution.
         /// </summary>
         [JsonProperty(PropertyName = "IF", ItemConverterType = typeof(StringEnumConverter), NullValueHandling = NullValueHandling.Ignore)]
-        public EIdentificationFlag[] IdentificationFlags { get; set; } = new EIdentificationFlag[0];
+        public EIdentificationFlag[] IdentificationFlags { get; set; } = Array.Empty<EIdentificationFlag>();
 
         /// <summary>
         /// The type of identification.
