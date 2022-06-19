@@ -26,6 +26,9 @@
     <None Update="Resources\01_valid_ocmf_message_compact">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\20_valid_ocmf_message_for_verification">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\02_valid_ocmf_message_formatted">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -9,7 +9,7 @@ namespace OpenChargeMeteringFormat
     /// <summary>
     /// A parser for the <see href="https://github.com/SAFE-eV/OCMF-Open-Charge-Metering-Format">OCMF protocol</see>.
     /// </summary>
-    public class OpenChargeMeteringFormatParser
+    public static class OpenChargeMeteringFormatParser
     {
         /// <summary>
         /// Parses the given <paramref name="message"/> as <see cref="OpenChargeMeteringFormatMessage"/>.
@@ -46,11 +46,11 @@ namespace OpenChargeMeteringFormat
                 return signatureResult.ToResult<OpenChargeMeteringFormatMessage>();
             }
 
-            return Result.Ok(new OpenChargeMeteringFormatMessage
-            {
-                Payload = payloadResult.Value,
-                Signature = signatureResult.Value,
-            });
+            return Result.Ok(new OpenChargeMeteringFormatMessage(
+                rawPayload: parts[1],
+                rawSignature: parts[2],
+                payload: payloadResult.Value,
+                signature: signatureResult.Value));
         }
 
         /// <summary>
