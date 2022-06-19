@@ -13,7 +13,9 @@ Install-Package OpenChargeMeteringFormat
 
 ## Usage
 
-There is only one class you should interact with called `OpenChargeMeteringFormatParser`.
+### Parse OCMF
+
+To parse an OCMF message, use the `OpenChargeMeteringFormatParser`.
 It provides you with two methods to validate and parse OCMF messages:
 
 ```csharp
@@ -52,7 +54,33 @@ Console.WriteLine($"Identification type: {parseResult.Value.Payload.Identificati
 Console.WriteLine($"Identification data: {parseResult.Value.Payload.IdentificationData}");
 ```
 
-### Results
+`IsValidMessage(message)` will only perform structural tests, no actual verification of the signature.
+
+### Verify OCMF signature
+
+To verify the signature of a parsed OCMF message, use the `OpenChargeMeteringFormatVerifier`.
+It provides a `Verify(OpenChargeMeteringFormatMessage message, string publicKey)` method,
+where you have to pass the output of `OpenChargeMeteringFormatParser.ParseMessage(message)`
+as well as the public key of the charge point meter.
+
+```csharp
+var message = "OCMF|{...}|{...}";
+var publicKey = "A0B1C2...";
+
+var parseResult = OpenChargeMeteringFormatParser.ParseMessage(message);
+if (parseResult.IsFailed)
+{
+    return;
+}
+
+var verificationResult = OpenChargeMeteringFormatVerifier.Verify(parseResult.Value, publicKey);
+if (verificationResult.IsFailed)
+{
+    Console.WriteLine("The OCMF message has an invalid signature or the provided public key is invalid.");
+}
+```
+
+### Method results
 
 This library makes use of [`FluentResults`](https://github.com/altmann/FluentResults),
 which allows returning a `Result<OpenChargeMeteringFormatMessage>` covering both,
