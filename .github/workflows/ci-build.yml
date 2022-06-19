@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Test dotnet ${{ matrix.dotnet-version }}
+    name: Test dotnet ${{ matrix.dotnet-version }} on ${{ matrix.operating-system }}
 
     runs-on: ${{ matrix.operating-system }}
 
