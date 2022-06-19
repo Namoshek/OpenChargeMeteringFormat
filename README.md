@@ -7,7 +7,9 @@
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Namoshek_OpenChargeMeteringFormat&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Namoshek_OpenChargeMeteringFormat)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Namoshek_OpenChargeMeteringFormat&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Namoshek_OpenChargeMeteringFormat)
 
-A .NET implementation of the [Open Charge Metering Format (OCMF)](https://github.com/SAFE-eV/OCMF-Open-Charge-Metering-Format).
+[`OpenChargeMeteringFormat`](https://www.nuget.org/packages/OpenChargeMeteringFormat/) was created by, and is maintained
+by [Marvin Mall](https://github.com/namoshek).
+It provides a .NET parser and verifier for the [Open Charge Metering Format (OCMF)](https://github.com/SAFE-eV/OCMF-Open-Charge-Metering-Format).
 
 ## Installation
 
